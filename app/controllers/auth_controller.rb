@@ -88,9 +88,6 @@ class AuthController < ApplicationController
     end
   end
 
-  def success
-  end
-
   def fail
   end
 end
