@@ -3,8 +3,12 @@ require 'net/https'
 require 'json'
 
 class AuthController < ApplicationController
+  @@error = ''
+  
   def initialize
     @new_user = true
+    @user = nil
+    @error = ''
   end
   
   def login
@@ -20,8 +24,8 @@ class AuthController < ApplicationController
       end
       
     rescue => e
-      # move to fail
-      puts "failed #{e}"
+      @@error = e;
+      redirect_to('/auth/fail')
     end
   end
   
@@ -89,5 +93,6 @@ class AuthController < ApplicationController
   end
 
   def fail
+    @error = @@error
   end
 end
